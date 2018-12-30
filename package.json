@@ -1,0 +1,25 @@
+{
+  "name": "onus",
+  "version": "1.0.0",
+  "description": "The things we own, own us. Catalog your life.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emags112/Onus.git"
+  },
+  "author": "Evan Magnussen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emags112/Onus/issues"
+  },
+  "homepage": "https://github.com/emags112/Onus#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.1"
+  }
+}
