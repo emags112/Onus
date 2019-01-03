@@ -7,41 +7,77 @@ const   express     =   require('express'),
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
-mongoose.connect('mongodb://localhost/onus');
+mongoose.connect('mongodb://localhost/onus', {useNewUrlParser: true});
 
 app.get('/', function(req, res){
     res.render('home');
 });
 
-//index route
-app.get('/onus', function(req, res){
-    res.render('Onus');
-});
-
-//create user
+//new user
 app.get('/onus/new', function(req, res){
-    res.render('Onus');
+    res.send("new user form");
 });
 
-//show user
-app.get('/onus/:userID', function(req, res){
-    res.render('Onus');
+app.post('/onus', function(req, res){
+    res.send(req.params);
 });
 
-//show collections
-app.get('/onus/:userID/collections', function(req, res){
-    res.render('Onus');
-});
+//no one gets herre without authentication
 
-//new collection
-app.get('/onus/:userID/collections/new', function(req, res){
-    res.render('Onus');
-});
+// index route:
+    // user profile page (show for all)
+    app.get('/onus/:id', function(req, res){
+        res.send(req.params);
+    });
 
-//create collection
-app.post('/onus/:userID/collections', function(req, res){
-    res.render('Onus');
-});
+    // user collections list:
+        // new collection
+        app.get('/onus/:id/collections/new', function(req, res){
+            res.send(req.params);
+        });
+        //create collection
+        app.post('/onus/:id/collections', function(req, res){
+            res.redirect('/onus/' + req.params.id);
+        });
+        //edit collection
+        app.get('/onus/:id/collections/:id/edit', function(req, res){
+            res.send(req.params);
+        });
+        // update collection
+        app.put('/onus/:id/collections/:id', function(req, res){
+            res.redirect('/onus/' + req.params.id);
+        });
+        // delete collection
+        app.delete('/onus/:id/collections/:id', function(req, res){
+            res.redirect('/onus/' + req.params.id);
+        });
+        // collection items list:
+            // new item
+            app.get('/onus/:id/collections/:id/items/new', function(req, res){
+                res.send(req.params);
+            });
+            //create item
+            app.post('/onus/:id/collections/:id/items', function(req, res){
+                res.redirect('/onus/' + req.params.id);
+            });
+            //edit item
+            app.get('/onus/:id/collections/:id/items/:id/edit', function(req, res){
+                res.send(req.params);
+            });
+            // update item
+            app.put('/onus/:id/collections/:id/items/:id', function(req, res){
+                res.redirect('/onus/' + req.params.id);
+            });
+            // delete item
+            app.delete('/onus/:id/collections/:id/items/:id', function(req, res){
+                res.redirect('/onus/' + req.params.id);
+            });
+
+// create user
+
+
+
+
 
 app.listen(3000, function(){
     console.log("Own this, Onus")
