@@ -32,3 +32,12 @@ $(document)
 $('#startButton').on('click', function(e){
   $('.ui.modal').modal('show');
 })
+
+//tab switching
+$('.tabular.menu .item').on('click', function(e){
+  $('.tabular.menu .item').removeClass('active');
+  $('.tab.segment').removeClass('active');
+  $(this).addClass('active');
+  let id = this.id;
+  $('#'+ id + "Segment").addClass('active');
+});
