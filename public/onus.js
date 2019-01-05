@@ -41,3 +41,8 @@ $('.tabular.menu .item').on('click', function(e){
   let id = this.id;
   $('#'+ id + "Segment").addClass('active');
 });
+
+// accordian inside of tabs
+$('.ui.accordion')
+  .accordion()
+;

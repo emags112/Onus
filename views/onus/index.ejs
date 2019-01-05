@@ -1,5 +1,6 @@
 <% include ../partials/header %>
-<div class="ui padded container segment">
+
+<div class="ui padded placeholder container segment">
     <h1>Hello world</h1>
     <div class="ui top attached tabular menu">
         <div id='home' class="item active">
@@ -13,18 +14,46 @@
         </div>
     </div>
     <div id="homeSegment" class="ui bottom attached active tab segment">
-        <p>Home</p>
-        <p>tab</p>
+        <p>this will be random</p>
+        <p>metrics about your stuff</p>
+        <p>a chart of total number of things</p>
+        <p>and a breakdown by collection</p>
     </div>
     <div id="collectionsSegment" class="ui bottom attached tab segment">
-        <p>collections</p>
-        <p>tab</p>
+        <% if(user.collections.length > 0){ %>
+            <div class="ui styled accordion">
+            <% user.collections.forEach(function(collection){ %>
+                <div class="title">
+                    <i class="dropdown icon"></i>
+                    <i class="archive icon"></i>
+                    <%= collection.name %>
+                </div>
+                <div class="content">
+                    <% if(collection.contents.length > 0){ %>
+                        <% collection.contents.forEach(function(item){ %>
+                        <div class="segment">
+                            <h5><%= item.name %></h5>
+                            <p><%= item.description %></p>
+                        </div>
+                        <% }) %>
+                    <% } else { %>
+                    <p class="transition hidden">
+                        This will be full of items at some point!
+                    </p>
+                    <% } %>
+                    <a href="/onus/<%= user._id %>/collections/<%= collection._id %>/items/new"><i class="plus icon"></i> Add an item to this collection</a>
+                </div>
+            <% }); %>
+            </div>
+        <% } else { %>
+            <h3>There doesnt seem to be anything here...</h3>
+        <% } %>
+        <a href="/onus/<%= user._id %>/collections/new">Create a new collection!</a>
     </div>
     <div id="itemsSegment" class="ui bottom attached tab segment">
-        <p>items</p>
-        <p>tab</p>
+        <p>all items</p>
+        <p>in card form</p>
     </div>
 </div>
-
 
 <% include ../partials/footer %>

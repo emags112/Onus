@@ -1,9 +1,9 @@
 const   express     =   require('express'),
         mongoose    =   require('mongoose'),
         bodyParser  =   require('body-parser'),
-        item        =   require('./models/item'),
+        Item        =   require('./models/item'),
         User        =   require('./models/user'),
-        collection  =   require('./models/collection'),
+        Collection  =   require('./models/collection'),
         seedDB      =   require('./seed'),      
         app         =   express();
 
@@ -20,8 +20,7 @@ app.get('/', function(req, res){
         if(err){
             console.log(err);
         } else {
-            console.log(foundUser);
-            res.render('main/home', {user: foundUser});
+            res.render('landing/landing', {user: foundUser});
         }
     });
 });
@@ -40,17 +39,46 @@ app.post('/onus', function(req, res){
 // index route:
     // user profile page (show for all)
     app.get('/onus/:user_id', function(req, res){
-        res.render('onus/index');
+        User.findOne({'_id': req.params.user_id}).populate({path: 'collections', 
+                                                        populate:{
+                                                            path: 'contents'
+                                                        }}).exec(function(err, foundUser){
+            if(err){
+                console.log(err);
+            } else {
+                res.render('onus/index', {user: foundUser});
+            }
+        });
     });
 
     // user collections list:
-        // new collection
+        // new collection page
         app.get('/onus/:user_id/collections/new', function(req, res){
-            res.send(req.params);
+            User.findOne({'_id': req.params.user_id}, function(err, foundUser){
+                if(err){
+                    console.log(err);
+                } else {
+                    res.render('collections/new', {user: foundUser});
+                }
+            });
         });
-        //create collection
+        //create collection route
         app.post('/onus/:user_id/collections', function(req, res){
-            res.redirect('/onus/' + req.params.user_id);
+            User.findById(req.params.user_id, function(err, foundUser){
+                if(err){
+                    console.log(err);
+                } else {
+                    Collection.create(req.body.collection, function(err, collection){
+                        if(err){
+                            console.log(err);
+                        } else {
+                            foundUser.collections.push(collection);
+                            foundUser.save();
+                            res.redirect('/onus/' + foundUser._id);
+                        }
+                    })
+                }
+            })
         });
         //edit collection
         app.get('/onus/:user_id/collections/:col_id/edit', function(req, res){
@@ -67,11 +95,34 @@ app.post('/onus', function(req, res){
         // collection items list:
             // new item
             app.get('/onus/:user_id/collections/:col_id/items/new', function(req, res){
-                res.send(req.params);
+                User.findOne({'_id': req.params.user_id}, function(err, foundUser){
+                    if(err){
+                        console.log(err);
+                    } else {
+                        res.render('item/new', {user: foundUser, col_id: req.params.col_id});
+                    }
+                });
             });
             //create item
             app.post('/onus/:user_id/collections/:col_id/items', function(req, res){
-                res.redirect('/onus/' + req.params.user_id);
+                Collection.findById(req.params.col_id, function(err, foundCol){
+                    console.log(foundCol)
+                    if(err){
+                        console.log(err);
+                    } else {
+                        Item.create(req.body.item, function(err, item){
+                            console.log(req.body.item,)
+                            if(err){
+                                console.log(err);
+                            } else {
+                                foundCol.contents.push(item);
+                                console.log(foundCol)
+                                foundCol.save();
+                                res.redirect('/onus/' + req.params.user_id);
+                            }
+                        })
+                    }
+                })
             });
             //edit item
             app.get('/onus/:user_id/collections/:col_id/items/:item_id/edit', function(req, res){

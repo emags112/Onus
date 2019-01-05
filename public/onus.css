@@ -130,3 +130,7 @@ i.circular.icon{
 #itemsSegment{
   margin-bottom: 1rem;
 }
+
+.ui.accordion .title .dropdown.icon, .ui.accordion .accordion .title .dropdown.icon{
+  float: right;
+}

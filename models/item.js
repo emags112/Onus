@@ -3,7 +3,7 @@ const   mongoose = require('mongoose'),
             type: {type: String, default: "item"},
             name: String,
             description: String,
-            purchaseDate: Date,
+            purchaseDate: String,
             serialNumber: String,
             value: String,
             tags: [String]
