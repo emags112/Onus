@@ -127,10 +127,43 @@ i.circular.icon{
   text-align: left;
 }
 
+.ui.padded.placeholder.container.segment{
+  margin-top: 2.5rem;
+}
+
 #itemsSegment{
   margin-bottom: 1rem;
 }
 
+.ui.styled.accordion{
+  width: 100%
+}
+
 .ui.accordion .title .dropdown.icon, .ui.accordion .accordion .title .dropdown.icon{
   float: right;
+}
+
+.pageTitle h1{
+  margin-bottom: 0;
+}
+
+.pageTitle h5{
+  margin-top: 0;
+}
+
+.cardbox{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ui.card{
+  margin: 1em !important;
+}
+
+.ui.card .content.head{
+  padding: 1em;
+}
+
+.ui.card .content.head h5{
+  line-height: 1.5em;
 }

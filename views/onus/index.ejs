@@ -1,7 +1,11 @@
 <% include ../partials/header %>
 
 <div class="ui padded placeholder container segment">
-    <h1>Hello world</h1>
+    <div class="pageTitle">
+        <h1>Hello <%= user.name %></h1>
+        <h5>These are the things that you own</h5>
+    </div>
+    <div class="ui divider"></div>
     <div class="ui top attached tabular menu">
         <div id='home' class="item active">
             Home
@@ -30,12 +34,19 @@
                 </div>
                 <div class="content">
                     <% if(collection.contents.length > 0){ %>
+                        <div class="cardbox">
                         <% collection.contents.forEach(function(item){ %>
-                        <div class="segment">
-                            <h5><%= item.name %></h5>
-                            <p><%= item.description %></p>
-                        </div>
+                            <div class="ui card">
+                                <div class="content head">
+                                    <h5 class="ui header"><i class="images outline icon"></i><%= item.name %></h5>
+                                </div>
+                                <div class="content">
+                                    <p><%= item.description %></p>
+                                </div>
+                                
+                            </div>
                         <% }) %>
+                        </div>
                     <% } else { %>
                     <p class="transition hidden">
                         This will be full of items at some point!
