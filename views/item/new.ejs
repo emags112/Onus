@@ -4,34 +4,62 @@
     <h1>this is the item/new route</h1>
     <div class="ui segment">
         <form class="ui form" action="/onus/<%= user._id %>/collections/<%= col_id %>/items" method="POST">
-            <div class="form item">
+            <div class="field">
                 <label for="item[name]">Name:</label>
                 <input type="text" name="item[name]" placeholder="The Mona Lisa">
             </div>
-            <div class="form item">
-                <label for="item[description]">Add a description</label>
-                <input type="text" name="item[description]" placeholder="Pairs of socks">
-            </div>
-            <div class="form item">
+        <div class="fields">
+            <div class="eight wide field">
                 <label for="item[purchaseDate]">When did you buy it?</label>
-                <input type="text" name="item[purchaseDate]" placeholder="Pairs of socks">
+                <input type="text" name="item[purchaseDate]" placeholder="about 10 months ago">
             </div>
-            <div class="form item">
+            <div class="eight wide field">
                 <label for="item[serialNumber]">Add a serial number?</label>
-                <input type="text" name="item[serialNumber]" placeholder="Pairs of socks">
+                <input type="text" name="item[serialNumber]" placeholder="a1b2c3d4">
             </div>
-            <div class="form item">
-                Priority:
-                <label for="item[priority]">5</label>
-                <input type="radio" name="item[priority]">
-                <label for="item[priority]">4</label>
-                <input type="radio" name="item[priority]">
-                <label for="item[priority]">3</label>
-                <input type="radio" name="item[priority]">
-                <label for="item[priority]">2</label>
-                <input type="radio" name="item[priority]">
-                <label for="item[priority]">1</label>
-                <input type="radio" name="item[priority]">
+        </div>
+        <div class="fields">  
+            <div class="ten wide field">
+                <label for="collection">Which collection does it belong to?</label>
+                <input type="text" name="collecti" placeholder="">
+            </div>
+            <div class="inline fields">
+                <label for="item[priority]">Priority:</label><br><br>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <label>5</label>
+                        <input type="radio" name="item[priority]">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <label>4</label>
+                        <input type="radio" name="item[priority]">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <label>3</label>
+                        <input type="radio" name="item[priority]">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <label>2</label>
+                        <input type="radio" name="item[priority]">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <label>1</label>
+                        <input type="radio" name="item[priority]">
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="field">
+                <label for="item[description]">Add a description</label>
+                <textarea name="item[description]" placeholder="Pairs of socks"></textarea>
             </div>
             <input type="submit">
         </form>

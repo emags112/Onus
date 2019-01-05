@@ -167,3 +167,12 @@ i.circular.icon{
 .ui.card .content.head h5{
   line-height: 1.5em;
 }
+
+.ui.form .inline.fields{
+  margin-bottom: 0;
+}
+
+.ui.form .inline.fields > label{
+  display: block;
+  width: 100%;
+}

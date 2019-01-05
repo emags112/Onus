@@ -52,7 +52,7 @@ app.post('/onus', function(req, res){
     });
 
     // user collections list:
-        // new collection page
+        // new collection form
         app.get('/onus/:user_id/collections/new', function(req, res){
             User.findOne({'_id': req.params.user_id}, function(err, foundUser){
                 if(err){
