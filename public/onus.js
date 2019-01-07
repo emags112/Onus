@@ -46,3 +46,13 @@ $('.tabular.menu .item').on('click', function(e){
 $('.ui.accordion')
   .accordion()
 ;
+
+//dropdown menus
+$('select.dropdown')
+  .dropdown()
+;
+
+//radio checkboxes
+$('.ui.radio.checkbox')
+  .checkbox()
+;

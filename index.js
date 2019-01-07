@@ -95,18 +95,24 @@ app.post('/onus', function(req, res){
         // collection items list:
             // new item
             app.get('/onus/:user_id/collections/:col_id/items/new', function(req, res){
-                User.findOne({'_id': req.params.user_id}, function(err, foundUser){
+                User.findOne({'_id': req.params.user_id}).populate('collections').exec( function(err, foundUser){
                     if(err){
                         console.log(err);
                     } else {
-                        res.render('item/new', {user: foundUser, col_id: req.params.col_id});
+                        Collection.findOne({'_id': req.params.col_id}, function(err, foundcollection){
+                            if(err){
+                                console.log(err);
+                            } else {
+                                res.render('item/new', {user: foundUser, collection: foundcollection});
+                            }
+                        });
                     }
                 });
             });
             //create item
             app.post('/onus/:user_id/collections/:col_id/items', function(req, res){
-                Collection.findById(req.params.col_id, function(err, foundCol){
-                    console.log(foundCol)
+                Collection.findById(req.body.selectiedCol, function(err, foundCol){
+                    console.log(req.body)
                     if(err){
                         console.log(err);
                     } else {

@@ -3,7 +3,7 @@
 <div class="ui container">
     <h1>this is the item/new route</h1>
     <div class="ui segment">
-        <form class="ui form" action="/onus/<%= user._id %>/collections/<%= col_id %>/items" method="POST">
+        <form class="ui form" action="/onus/<%= user._id %>/collections/<%= collection._id %>/items" method="POST">
             <div class="field">
                 <label for="item[name]">Name:</label>
                 <input type="text" name="item[name]" placeholder="The Mona Lisa">
@@ -20,39 +20,47 @@
         </div>
         <div class="fields">  
             <div class="ten wide field">
-                <label for="collection">Which collection does it belong to?</label>
-                <input type="text" name="collecti" placeholder="">
+                <label for="selectiedCol">Which collection does it belong to?</label>
+                <select name="selectiedCol" class="ui dropdown">
+                    <option value="<%= collection._id %>"><%= collection.name %></option>
+                    <div class="divider"></div>
+                    <optgroup>
+                        <% user.collections.forEach(function(col){ %>
+                            <option value="<%= col._id %>"><%= col.name %></option>
+                        <% }) %>
+                    </optgroup>
+                </select>
             </div>
             <div class="inline fields">
                 <label for="item[priority]">Priority:</label><br><br>
                 <div class="field">
                     <div class="ui radio checkbox">
                         <label>5</label>
-                        <input type="radio" name="item[priority]">
+                        <input type="radio" name="item[priority]" value="5">
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui radio checkbox">
                         <label>4</label>
-                        <input type="radio" name="item[priority]">
+                        <input type="radio" name="item[priority]" value="4">
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui radio checkbox">
                         <label>3</label>
-                        <input type="radio" name="item[priority]">
+                        <input type="radio" name="item[priority]" value="3">
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui radio checkbox">
                         <label>2</label>
-                        <input type="radio" name="item[priority]">
+                        <input type="radio" name="item[priority]" value="2">
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui radio checkbox">
                         <label>1</label>
-                        <input type="radio" name="item[priority]">
+                        <input type="radio" name="item[priority]" value="1">
                     </div>
                 </div>
             </div>

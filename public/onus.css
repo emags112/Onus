@@ -176,3 +176,8 @@ i.circular.icon{
   display: block;
   width: 100%;
 }
+
+.ui.field div.item:nth-of-type(1){
+  border-top: 1px solid #aaa !important;
+  border-bottom: 1px solid #aaa !important;
+}
