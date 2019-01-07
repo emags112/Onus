@@ -3,7 +3,6 @@ const   mongoose = require('mongoose'),
             type: {type: String, default: "user"},
             name: String,
             email: String,
-            password: String,
             collections: [{
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Collection'
