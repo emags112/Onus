@@ -1,4 +1,4 @@
-const   mongoose = require('mongoose'),
+const   mongoose        = require('mongoose'),
         collectionSchema = new mongoose.Schema({
             type: {type: String, default: "collection"},
             name: String,

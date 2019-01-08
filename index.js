@@ -1,18 +1,53 @@
-const   express     =   require('express'),
-        mongoose    =   require('mongoose'),
-        bodyParser  =   require('body-parser'),
-        Item        =   require('./models/item'),
-        User        =   require('./models/user'),
-        Collection  =   require('./models/collection'),
-        seedDB      =   require('./seed'),      
-        app         =   express();
+const   express         =   require('express'),
+        app             =   express(),
+        mongoose        =   require('mongoose'),
+        bodyParser      =   require('body-parser'),
+        passport        =   require('passport'),      
+        localStrategy   =   require('passport-local'),      
+        Item            =   require('./models/item'),
+        User            =   require('./models/user'),
+        Collection      =   require('./models/collection'),
+        seedDB          =   require('./seed');
 
-
+// creates a user with collection and item
 seedDB();
-mongoose.connect('mongodb://localhost/onus', {useNewUrlParser: true});
-app.set('view engine', 'ejs');
-app.use(express.static('public'));
+//connects to database
+mongoose.connect('mongodb://localhost:27017/onus', {useNewUrlParser: true});
+app.use(express.static(__dirname + '/public'));
+// turns req.body to json format
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+//tracks session of user
+app.use(require('express-session')({
+    secret: 'onus own this',
+    resave: false,
+    saveUninitialized: false
+}));
+// starts passport
+app.use(passport.initialize());
+// starts clean session fro user
+app.use(passport.session());
+// defines what the current user is
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    next();
+});
+
+// passposrt setup
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// allows for ejs use as main compiler
+app.set('view engine', 'ejs');
+
+// middleware to determin if the user is logged in and limit access if not
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect('/login');
+}
 
 
 app.get('/', function(req, res){
@@ -25,16 +60,26 @@ app.get('/', function(req, res){
     });
 });
 
-//new user
+//new user form (also part of modal)
 app.get('/onus/new', function(req, res){
-    res.send("new user form");
+    res.render('landing/register');
 });
 
-app.post('/onus', function(req, res){
-    res.redirect('/onus/' + req.params.user_id);
+//user create 'post'
+app.post('/register', function(req, res){
+    User.register(new User({username: req.body.username,
+                                name: req.body.name}), req.body.password, function(err, user){
+        if(err){
+            console.log(err);
+            return res.redirect('/');
+        }
+        passport.authenticate('local')(req, res, function(){
+            res.redirect('/onus/' + user._id)
+        })
+    });
 });
 
-//no one gets herre without authentication
+//no one gets here without authentication
 
 // index route:
     // user profile page (show for all)
@@ -143,7 +188,6 @@ app.post('/onus', function(req, res){
                 res.redirect('/onus/' + req.params.user_id);
             });
 
-// create user
 
 
 
@@ -152,29 +196,3 @@ app.post('/onus', function(req, res){
 app.listen(3000, function(){
     console.log("Own this, Onus")
 });
-
-//user - single
-    //{
-        //Name
-        //Username
-        //Password
-    //}
-    //home - multiple
-        //{
-            //name
-            //Owner
-        //}
-        //room - multiple
-            //{
-                //name
-                //home
-            //}
-            //item - multiple
-                //{
-                    //name
-                    //description
-                    //purchase price (or estimate)
-                    //image
-                    //priority
-                    //room
-                //}

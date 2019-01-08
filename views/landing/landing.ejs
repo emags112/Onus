@@ -3,7 +3,7 @@
   <div class="ui text container">
     <h1 class="ui center aligned inverted icon header"><i class="circular archive icon"></i> ONUS</h1>
     <div class="ui divider"></div>
-    <h3><a href="/onus/<%= user._id %>">The things we own should not own us</a></h3>
+    <h3>The things we own should not own us</h3>
     <br />
     <div id="startButton" class="ui button large primary">Get Started!</div>
   </div>
@@ -19,7 +19,7 @@
       <div class="ui vertical divider">Or</div>
       <div class="column">
         <div class="ui header">Login</div>
-          <form name="login_form" class='ui form' action="">
+          <form name="login_form" class='ui form' action="/login" method="POST">
             <div class="field">
               <label for="username">Username</label>
               <input type="text" name='username' placeholder="Username">
@@ -28,34 +28,30 @@
               <label for="password">Password</label>
               <input type="password" name='password' placeholder="Password">
             </div>
+            <button class="ui button" type="submit">Sign in</button>
           </form>
       </div>
       <div class="column">
         <div class="ui header">Join</div>
-        <form name="join_form" class='ui form' action="">
+        <form name="join_form" class='ui form'  action="/register" method="POST">
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" name='name' placeholder="Name">
+            </div>
             <div class="field">
               <label for="username">Username</label>
               <input type="text" name='username' placeholder="Username">
             </div>
             <div class="field">
               <label for="password">Password</label>
-              <input type="text" name='password' placeholder="Password">
-            </div>
-            <div class="field">
-              <label for="password">Confirm Password</label>
               <input type="password" name='password' placeholder="Password">
             </div>
+            <button class="ui button" type="submit">Join</button>
           </form>
       </div>
     </div>
   </div>
   <div class="ui bottom attached segment">
-    <div class="actions">
-      <div class="ui black deny button">Nope</div>
-      <div class="ui positive right labeled icon button">
-        Yep, that's me <i class="checkmark icon"></i>
-      </div>
-    </div>
   </div>
 </div>
 
