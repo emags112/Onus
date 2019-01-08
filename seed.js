@@ -16,36 +16,36 @@ const   mongoose    = require('mongoose'),
 
 function seedDB(){
     //remove users
-    User.remove({}, function(err){
+    User.deleteMany({}, function(err){
         if(err){
             console.log(err);
         }
         console.log('removed users');
         //remove collections
-        Collection.remove({}, function(err){
+        Collection.deleteMany({}, function(err){
             if(err){
                 console.log(err);
             }
             console.log('collections removed');
-            //add users back in
-            User.create(userData, function(err, user){
-                if(err){
-                    console.log(err);
-                } else {
-                    console.log('user created');
-                    collectionData.forEach(function(collection){
-                        Collection.create(collection, function(err, collect){
-                            if(err){
-                                console.log(err);
-                            } else {
-                                user.collections.push(collect);
-                                user.update();
-                                console.log('collection created');
-                            }
-                        });
-                    }); 
-                }
-            });
+            // //add users back in
+            // User.create(userData, function(err, user){
+            //     if(err){
+            //         console.log(err);
+            //     } else {
+            //         console.log('user created');
+            //         collectionData.forEach(function(collection){
+            //             Collection.create(collection, function(err, collect){
+            //                 if(err){
+            //                     console.log(err);
+            //                 } else {
+            //                     user.collections.push(collect);
+            //                     user.update();
+            //                     console.log('collection created');
+            //                 }
+            //             });
+            //         }); 
+            //     }
+            // });
         });
     });
 };

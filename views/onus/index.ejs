@@ -16,6 +16,9 @@
         <div id='items' class="item">
             Items
         </div>
+        <div id='profile' class="item">
+            Profile
+        </div>
     </div>
     <div id="homeSegment" class="ui bottom attached active tab segment">
         <p>this will be random</p>
@@ -64,6 +67,23 @@
     <div id="itemsSegment" class="ui bottom attached tab segment">
         <p>all items</p>
         <p>in card form</p>
+    </div>
+    <div id="profileSegment" class="ui bottom attached tab segment">
+        <form class="ui form" action="">
+            <div class="field">
+                <label for="name">Change Name</label>
+                <input type="text" name='name' value="<%= currentUser.name %>">
+            </div>
+            <div class="field">
+                <label for="username">Change Username</label>
+                <input type="text" name='username' value="<%= currentUser.username %>">
+            </div>
+            <!-- <div class="field">
+                <label for="password">Change Password</label>
+                <input type="password" name='password' value="<%= currentUser.password %>">
+            </div> -->
+            <button class="ui button" type="submit">Update</button>
+        </form>
     </div>
 </div>
 

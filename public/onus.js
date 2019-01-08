@@ -56,3 +56,8 @@ $('select.dropdown')
 $('.ui.radio.checkbox')
   .checkbox()
 ;
+
+//checkboxes
+$('.ui.checkbox')
+  .checkbox()
+;

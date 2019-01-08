@@ -15,12 +15,18 @@
         <div class="item">
             <h1 class="header menu-header"><span>< O ></span> Onus</h1>
             <div class="menu">
-                <a class="item active"><i class="home icon"></i>Home</a>
-                <a class="item"><i class="address card icon"></i> Log In</a>
+                <a href='/' class="item active"><i class="home icon"></i>Home</a>
+                <% if(!currentUser){ %>
+                    <a href='/login'class="item"><i class="address card icon"></i> Log In</a>
+                    <a href='/register'class="item"><i class="user plus icon"></i> Register</a>
+                <% } else { %>
+                    <a href='/onus/<%= currentUser._id %>'class="item"><i class="id card icon"></i> Profile</a>
+                    <a href='/login'class="item"><i class="address card icon"></i> Log Out</a>
+                <% } %>
             </div>
         </div>
         <div class="item">
-            <h1 class="header">Home</h1>
+            <h1 class="header"><%= currentUser %></h1>
             <div class="menu">
                 <a class="item">Kitchen</a>
                 <a class="item">Living Room</a>

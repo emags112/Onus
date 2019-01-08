@@ -50,14 +50,8 @@ function isLoggedIn(req, res, next){
 }
 
 
-app.get('/', function(req, res){
-    User.findOne({'name': 'Evan'}, function(err, foundUser){
-        if(err){
-            console.log(err);
-        } else {
-            res.render('landing/landing', {user: foundUser});
-        }
-    });
+app.get('/', function(req, res){ 
+    res.render('landing/landing', {user: null});
 });
 
 //new user form (also part of modal)
