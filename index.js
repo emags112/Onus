@@ -14,7 +14,7 @@ const   itemRoutes       =   require('./routes/item'),
         indexRoutes      =   require('./routes/index');
 
 // creates a user with collection and item
-seedDB();
+// seedDB();
 //connects to database
 mongoose.connect('mongodb://localhost:27017/onus', {useNewUrlParser: true});
 app.use(express.static(__dirname + '/public'));
