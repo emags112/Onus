@@ -39,7 +39,7 @@ router.post('/', isLoggedIn, function(req, res){
                 } else {
                     foundUser.collections.push(collection);
                     foundUser.save();
-                    res.redirect('/onus/' + foundUser._id);
+                    res.redirect('/' + foundUser._id);
                 }
             })
         }
@@ -53,12 +53,12 @@ router.get('/:col_id/edit', isLoggedIn, function(req, res){
 
 // update collection
 router.put('/:col_id', isLoggedIn, function(req, res){
-    res.redirect('/onus/' + req.params.user_id);
+    res.redirect('/' + req.params.user_id);
 });
 
 // delete collection
 router.delete('/:col_id', isLoggedIn, function(req, res){
-    res.redirect('/onus/' + req.params.user_id);
+    res.redirect('/' + req.params.user_id);
 });
 
 module.exports = router;

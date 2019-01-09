@@ -13,7 +13,7 @@ function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
-    res.redirect('/onus/login');
+    res.redirect('/login');
 }
 
 router.get('/', function(req, res){ 
@@ -21,31 +21,36 @@ router.get('/', function(req, res){
 });
 
 //new user form (also part of modal)
-router.get('/onus/register', function(req, res){
+router.get('/register', function(req, res){
     res.render('landing/register');
 });
 
 //user create 'post'
-router.post('/onus/register', function(req, res){
+router.post('/register', function(req, res){
     User.register(new User({username: req.body.username,
                                 name: req.body.name}), req.body.password, function(err, user){
         if(err){
             console.log(err);
-            return res.redirect('/onus/register');
+            return res.redirect('/register');
         }
         passport.authenticate('local')(req, res, function(){
-            res.redirect('/onus/' + user._id)
+            res.redirect('/' + user._id)
         })
     });
 });
 
+//user update put
+router.put('/:user_id', isLoggedIn, function(req, res){
+
+});
+
 //login form
-router.get('/onus/login', function(req, res){
+router.get('/login', function(req, res){
     res.render('landing/login');
 });
 
 //login post
-router.post('/onus/login', function(req, res){
+router.post('/login', function(req, res){
     User.findOne({'username': req.body.username}, function(err, foundUser){
         if(err){
             return res.redirect('back');
@@ -54,7 +59,7 @@ router.post('/onus/login', function(req, res){
             if(err){
                 return res.redirect('/onus/login')
             }
-            res.redirect('/onus/' + foundUser._id)
+            res.redirect('/' + foundUser._id)
         });
     }); 
 });
@@ -66,7 +71,7 @@ router.get('/logout', function(req, res){
 });
 
 // user profile page (show for all)
-router.get('/onus/:user_id', isLoggedIn, function(req, res){
+router.get('/:user_id', isLoggedIn, function(req, res){
     User.findOne({'_id': req.params.user_id}).populate({path: 'collections', 
                                                     populate:{
                                                         path: 'contents'

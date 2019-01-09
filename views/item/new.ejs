@@ -3,7 +3,7 @@
 <div class="ui container">
     <h1>this is the item/new route</h1>
     <div class="ui segment">
-        <form class="ui form" action="/onus/<%= user._id %>/collections/<%= collection._id %>/items" method="POST">
+        <form class="ui form" action="/<%= user._id %>/collections/<%= collection._id %>/items" method="POST">
             <div class="field">
                 <label for="item[name]">Name:</label>
                 <input type="text" name="item[name]" placeholder="The Mona Lisa">

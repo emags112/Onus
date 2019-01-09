@@ -17,10 +17,10 @@
             <div class="menu">
                 <a href='/' class="item active"><i class="home icon"></i>Home</a>
                 <% if(!currentUser){ %>
-                    <a href='/onus/login'class="item"><i class="address card icon"></i> Log In</a>
-                    <a href='/onus/register'class="item"><i class="user plus icon"></i> Register</a>
+                    <a href='/login'class="item"><i class="address card icon"></i> Log In</a>
+                    <a href='/register'class="item"><i class="user plus icon"></i> Register</a>
                 <% } else { %>
-                    <a href='/onus/<%= currentUser._id %>'class="item"><i class="id card icon"></i> Profile</a>
+                    <a href='/<%= currentUser._id %>'class="item"><i class="id card icon"></i> Profile</a>
                     <a href='/logout'class="item"><i class="address card outline icon"></i> Log Out</a>
                 <% } %>
             </div>

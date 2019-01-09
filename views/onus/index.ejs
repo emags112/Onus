@@ -57,12 +57,12 @@
                                     <p><%= item.description %></p>
                                 </div>
                                 <div class="extra content">
-                                    <a  href="/onus/<%= user._id %>/collections/<%= collection._id %>/items/<%= item._id %>/edit"
+                                    <a  href="/<%= user._id %>/collections/<%= collection._id %>/items/<%= item._id %>/edit"
                                         class="mini ui primary basic button">
                                         <i class="edit outline icon"></i>
                                         Edit
                                     </a>
-                                    <form class="inlineForm" action="/onus/<%= user._id %>/collections/<%= collection._id %>/items/<%= item._id %>/?_method=DELETE" method="POST">
+                                    <form class="inlineForm" action="/<%= user._id %>/collections/<%= collection._id %>/items/<%= item._id %>/?_method=DELETE" method="POST">
                                         <button class="mini ui orange basic button"><i class="trash alternate outline icon"></i>Delete</button>
                                     </form>
                                 </div>
@@ -75,7 +75,7 @@
                         This will be full of items at some point!
                     </p>
                     <% } %>
-                    <a href="/onus/<%= user._id %>/collections/<%= collection._id %>/items/new"><i class="plus icon"></i>Add an item to this collection</a>
+                    <a href="/<%= user._id %>/collections/<%= collection._id %>/items/new"><i class="plus icon"></i>Add an item to this collection</a>
                 </div>
             <% }); %>
             </div>
@@ -84,7 +84,7 @@
         <% } %>
         <div class="ui divider"></div>
         <div>
-            <a href="/onus/<%= user._id %>/collections/new"><i class="plus icon"></i>Create a new collection!</a>
+            <a href="/<%= user._id %>/collections/new"><i class="plus icon"></i>Create a new collection!</a>
         </div>
     </div>
 
@@ -92,7 +92,7 @@
     <div id="createSegment" class="ui bottom attached tab segment">
             <div class="ui placeholder segment">
               <div class="ui header">Create a Collection</div>
-              <form class="ui form" action="/onus/<%= user._id %>/collections" method="POST">
+              <form class="ui form" action="/<%= user._id %>/collections" method="POST">
                     <div class="field">
                         <label for="name">Name your collection</label>
                         <input type="text" name="collection[name]" placeholder="Pairs of socks">
@@ -197,7 +197,7 @@
 
     function setAction(){
         collectionID = selectedCol.value;
-        form.setAttribute('action', `/onus/<%= user._id %>/collections/${collectionID}/items`);
+        form.setAttribute('action', `/<%= user._id %>/collections/${collectionID}/items`);
     }
 
     window.onload = setAction;

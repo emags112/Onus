@@ -49,8 +49,8 @@ passport.deserializeUser(User.deserializeUser());
 app.set('view engine', 'ejs');
 
 app.use('/', indexRoutes)
-app.use('/onus/:user_id/collections', collectionRoutes)
-app.use('/onus/:user_id/collections/:col_id/items', itemRoutes)
+app.use('/:user_id/collections', collectionRoutes)
+app.use('/:user_id/collections/:col_id/items', itemRoutes)
 
 app.listen(3000, function(){
     console.log("Own this, Onus")

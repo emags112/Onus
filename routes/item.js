@@ -13,7 +13,7 @@ function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
-    res.redirect('/onus/login');
+    res.redirect('/login');
 }
 
 // new item
@@ -45,7 +45,7 @@ router.post('/', isLoggedIn, function(req, res){
                 } else {
                     foundCol.contents.push(item);
                     foundCol.save();
-                    res.redirect('/onus/' + req.params.user_id);
+                    res.redirect('/' + req.params.user_id);
                 }
             })
         }
@@ -83,7 +83,7 @@ router.put('/:itemID', isLoggedIn, function(req, res){
         if(err){
             res.redirect('back');
         } else {
-            res.redirect('/onus/' + req.params.user_id);
+            res.redirect('/' + req.params.user_id);
         }
     })
 });
@@ -96,7 +96,7 @@ router.delete('/:itemID/', isLoggedIn, function(req, res){
             res.redirect('back');
         } else {
             console.log(data);
-            res.redirect('/onus/' + req.params.user_id);
+            res.redirect('/' + req.params.user_id);
         }
     })
 });
