@@ -39,6 +39,10 @@
                     <%= collection.name %>
                 </div>
                 <div class="content">
+                    <div class="buttons">
+                        <a class="ui mini teal basic button inlineButton" href="/<%= user._id %>/collections/<%= collection._id %>/items/new"><i class="plus icon"></i>Add Item</a>
+                        <a class="ui mini blue basic button inlineButton" href="/<%= user._id %>/collections/<%= collection._id %>/edit"><i class="edit outline icon"></i>Edit Collection</a>
+                    </div>
                     <% if(collection.contents.length > 0){ %>
                         <div class="cardbox">
                         <% collection.contents.forEach(function(item){ %>
@@ -75,7 +79,7 @@
                         This will be full of items at some point!
                     </p>
                     <% } %>
-                    <a href="/<%= user._id %>/collections/<%= collection._id %>/items/new"><i class="plus icon"></i>Add an item to this collection</a>
+
                 </div>
             <% }); %>
             </div>
@@ -84,7 +88,7 @@
         <% } %>
         <div class="ui divider"></div>
         <div>
-            <a href="/<%= user._id %>/collections/new"><i class="plus icon"></i>Create a new collection!</a>
+            <a class="ui mini teal basic button inlineButton" href="/<%= user._id %>/collections/new"><i class="plus icon"></i>Create a new collection!</a>
         </div>
     </div>
 

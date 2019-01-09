@@ -48,12 +48,24 @@ router.post('/', isLoggedIn, function(req, res){
 
 //edit collection form
 router.get('/:col_id/edit', isLoggedIn, function(req, res){
-    res.send(req.params);
+    Collection.findOne({"_id": req.params.col_id}, function(err, foundCol){
+        if(err){
+            return redirect('back');
+        } else {
+            res.render('collections/edit',{collection: foundCol})
+        }
+    });
 });
 
 // update collection
 router.put('/:col_id', isLoggedIn, function(req, res){
-    res.redirect('/' + req.params.user_id);
+    Collection.findOneAndUpdate({"_id": req.params.col_id}, req.body.collection, function(err, foundCol){
+        if(err){
+            return redirect('back');
+        } else {
+            res.redirect('/'+ req.params.user_id)
+        }
+    });
 });
 
 // delete collection
