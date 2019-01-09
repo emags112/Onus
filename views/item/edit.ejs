@@ -1,0 +1,77 @@
+<% include ../partials/header %>
+
+<div class="ui container">
+    <h1>this is the item/edit route</h1>
+    <div class="ui segment">
+        <form class="ui form" action="/onus/<%= user._id %>/collections/<%= collection._id %>/items/<%= item._id %>?_method=PUT" method="POST">
+            <div class="field">
+                <label for="item[name]">Name:</label>
+                <input type="text" name="item[name]" value="<%= item.name %>">
+            </div>
+        <div class="fields">
+            <div class="eight wide field">
+                <label for="item[purchaseDate]">When did you buy it?</label>
+                <input type="text" name="item[purchaseDate]" value="<%= item.purchaseDate %>">
+            </div>
+            <div class="eight wide field">
+                <label for="item[serialNumber]">Add a serial number?</label>
+                <input type="text" name="item[serialNumber]" value="<%= item.serialNumber %>">
+            </div>
+        </div>
+        <div class="fields">  
+            <div class="ten wide field">
+                <label for="selectiedCol">Which collection does it belong to?</label>
+                <select name="selectiedCol" class="ui dropdown">
+                    <option value="<%= collection._id %>"><%= collection.name %></option>
+                    <div class="divider"></div>
+                    <optgroup>
+                        <% user.collections.forEach(function(col){ %>
+                            <option value="<%= col._id %>"><%= col.name %></option>
+                        <% }) %>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="inline fields">
+                <label for="item[stars]">Priority:</label>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <label>5</label>
+                        <input type="radio" name="item[stars]" value="5">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <label>4</label>
+                        <input type="radio" name="item[stars]" value="4">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <label>3</label>
+                        <input type="radio" name="item[stars]" value="3">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <label>2</label>
+                        <input type="radio" name="item[stars]" value="2">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <label>1</label>
+                        <input type="radio" name="item[stars]" value="1">
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="field">
+                <label for="item[description]">Add a description</label>
+                <textarea name="item[description]"><%= item.description %></textarea>
+            </div>
+            <input class="ui button" type="submit">
+        </form>
+    </div>
+</div>
+
+<% include ../partials/footer %>

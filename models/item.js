@@ -5,7 +5,7 @@ const   mongoose        = require('mongoose'),
             description: String,
             purchaseDate: String,
             serialNumber: String,
-            value: String,
+            stars: Number,
             tags: [String]
         });
 

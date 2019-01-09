@@ -13,19 +13,22 @@
         <div id='collections' class="item">
             Collections
         </div>
-        <div id='items' class="item">
-            Items
+        <div id='create' class="item">
+            Create
         </div>
         <div id='profile' class="item">
             Profile
         </div>
     </div>
+    <!-- first div with random stats eventually -->
     <div id="homeSegment" class="ui bottom attached active tab segment">
         <p>this will be random</p>
         <p>metrics about your stuff</p>
         <p>a chart of total number of things</p>
         <p>and a breakdown by collection</p>
     </div>
+
+    <!-- Main display of things -->
     <div id="collectionsSegment" class="ui bottom attached tab segment">
         <% if(user.collections.length > 0){ %>
             <div class="ui styled accordion">
@@ -41,10 +44,27 @@
                         <% collection.contents.forEach(function(item){ %>
                             <div class="ui card">
                                 <div class="content head">
-                                    <h5 class="ui header"><i class="images outline icon"></i><%= item.name %></h5>
+                                    <h5 class="header"><i class="images outline icon"></i><%= item.name %></h5>
+                                    <div class="meta">
+                                            <p><%= item.purchaseDate %></p>
+                                            <% if(item.stars){ %>
+                                                <% for(x = item.stars; x > 0; x--){ %>
+                                                    <i class="star icon"></i>
+                                            <% }} %>
+                                    </div>
                                 </div>
                                 <div class="content">
                                     <p><%= item.description %></p>
+                                </div>
+                                <div class="extra content">
+                                    <a  href="/onus/<%= user._id %>/collections/<%= collection._id %>/items/<%= item._id %>/edit"
+                                        class="mini ui primary basic button">
+                                        <i class="edit outline icon"></i>
+                                        Edit
+                                    </a>
+                                    <form class="inlineForm" action="/onus/<%= user._id %>/collections/<%= collection._id %>/items/<%= item._id %>/?_method=DELETE" method="POST">
+                                        <button class="mini ui orange basic button"><i class="trash alternate outline icon"></i>Delete</button>
+                                    </form>
                                 </div>
                                 
                             </div>
@@ -55,19 +75,103 @@
                         This will be full of items at some point!
                     </p>
                     <% } %>
-                    <a href="/onus/<%= user._id %>/collections/<%= collection._id %>/items/new"><i class="plus icon"></i> Add an item to this collection</a>
+                    <a href="/onus/<%= user._id %>/collections/<%= collection._id %>/items/new"><i class="plus icon"></i>Add an item to this collection</a>
                 </div>
             <% }); %>
             </div>
         <% } else { %>
             <h3>There doesnt seem to be anything here...</h3>
         <% } %>
-        <a href="/onus/<%= user._id %>/collections/new">Create a new collection!</a>
+        <div class="ui divider"></div>
+        <div>
+            <a href="/onus/<%= user._id %>/collections/new"><i class="plus icon"></i>Create a new collection!</a>
+        </div>
     </div>
-    <div id="itemsSegment" class="ui bottom attached tab segment">
-        <p>all items</p>
-        <p>in card form</p>
+
+    <!-- item and collection create form -->
+    <div id="createSegment" class="ui bottom attached tab segment">
+            <div class="ui placeholder segment">
+              <div class="ui header">Create a Collection</div>
+              <form class="ui form" action="/onus/<%= user._id %>/collections" method="POST">
+                    <div class="field">
+                        <label for="name">Name your collection</label>
+                        <input type="text" name="collection[name]" placeholder="Pairs of socks">
+                    </div>
+                    <button class="ui left floated button" type="submit">Create Collection</button>
+                </form>
+            </div>
+            <div class="ui placeholder segment">
+              <div class="ui header">Create an Item</div>
+                <form id="itemForm" class="ui form" action="" method="POST">
+                    <div class="field">
+                        <label for="item[name]">Name:</label>
+                        <input type="text" name="item[name]" placeholder="The Mona Lisa">
+                    </div>
+                <div class="fields">
+                    <div class="field">
+                        <label for="item[purchaseDate]">When did you buy it?</label>
+                        <input type="text" name="item[purchaseDate]" placeholder="about 10 months ago">
+                    </div>
+                    <div class="field">
+                        <label for="item[serialNumber]">Add a serial number?</label>
+                        <input type="text" name="item[serialNumber]" placeholder="a1b2c3d4">
+                    </div>
+                </div>
+                <div class="fields">  
+                    <div class="field">
+                        <label for="selectiedCol">Which collection does it belong to?</label>
+                        <select id="selectiedCol" name="selectiedCol" class="ui dropdown">
+                            <optgroup>
+                                <% user.collections.forEach(function(col){ %>
+                                    <option value="<%= col._id %>"><%= col.name %></option>
+                                <% }) %>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="radio fields">
+                        <div class="field"><label for="item[stars]">Stars:</label></div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <label>5</label>
+                                <input type="radio" name="item[stars]" value="5">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <label>4</label>
+                                <input type="radio" name="item[stars]" value="4">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <label>3</label>
+                                <input type="radio" name="item[stars]" value="3">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <label>2</label>
+                                <input type="radio" name="item[stars]" value="2">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <label>1</label>
+                                <input type="radio" name="item[stars]" value="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="field">
+                        <label for="item[description]">Add a description</label>
+                        <textarea name="item[description]" placeholder="Pairs of socks"></textarea>
+                    </div>
+                    <button class="ui left floated button" type="submit">Create Item</button>
+                </form>
+            </div>
     </div>
+
+    <!-- User profile update form -->
     <div id="profileSegment" class="ui bottom attached tab segment">
         <form class="ui form" action="">
             <div class="field">
@@ -87,4 +191,17 @@
     </div>
 </div>
 
+<script>
+    const form = document.querySelector('#itemForm');
+    const selectedCol = document.querySelector('#selectiedCol');
+
+    function setAction(){
+        collectionID = selectedCol.value;
+        form.setAttribute('action', `/onus/<%= user._id %>/collections/${collectionID}/items`);
+    }
+
+    window.onload = setAction;
+    document.querySelector('#selectiedCol').addEventListener('change', setAction)
+
+</script>
 <% include ../partials/footer %>

@@ -160,12 +160,13 @@ i.circular.icon{
   margin: 1em !important;
 }
 
-.ui.card .content.head{
+.ui.card .content.head, .ui.card .extra.content{
   padding: 1em;
 }
 
-.ui.card .content.head h5{
+.ui.card .content.head .header{
   line-height: 1.5em;
+  margin:0;
 }
 
 .ui.form .inline.fields{
@@ -180,4 +181,44 @@ i.circular.icon{
 .ui.field div.item:nth-of-type(1){
   border-top: 1px solid #aaa !important;
   border-bottom: 1px solid #aaa !important;
+}
+
+.ui.card .button{
+  display: inline-block !important;
+}
+
+.inlineForm{
+  display: inline;
+}
+
+/* create tab form styles */
+.ui.placeholder.segment .field, .ui.placeholder.segment > .ui.input, .ui.placeholder.segment .button{
+  max-width: 90%;
+}
+
+.ui.placeholder.segment textarea{
+  max-width: 100%;
+}
+
+.ui.placeholder.segment .fields{
+  display: block;
+}
+
+.ui.placeholder.segment .radio.fields{
+  max-width: 90% !important;
+  margin: 0 auto 1em auto !important;
+  padding: 0 .5em; 
+}
+
+.ui.placeholder.segment .radio.fields .field{ 
+  display: inline;
+}
+
+.ui.placeholder.segment .fields .field{
+  max-width: 90%;
+  margin: auto;  
+}
+
+form button.ui.left.floated.button{
+  margin-left: 5% !important;
 }

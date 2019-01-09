@@ -7,6 +7,7 @@ const   express         =   require('express'),
         Item            =   require('./models/item'),
         User            =   require('./models/user'),
         Collection      =   require('./models/collection'),
+        methodOverride  =   require('method-override'),
         seedDB          =   require('./seed');
 
 const   itemRoutes       =   require('./routes/item'),
@@ -21,6 +22,8 @@ app.use(express.static(__dirname + '/public'));
 // turns req.body to json format
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+//allows for restful put and delete from forms
+app.use(methodOverride('_method'));
 //tracks session of user
 app.use(require('express-session')({
     secret: 'onus own this',

@@ -66,7 +66,7 @@ router.get('/logout', function(req, res){
 });
 
 // user profile page (show for all)
-router.get('/onus/:user_id', function(req, res){
+router.get('/onus/:user_id', isLoggedIn, function(req, res){
     User.findOne({'_id': req.params.user_id}).populate({path: 'collections', 
                                                     populate:{
                                                         path: 'contents'
