@@ -48,9 +48,9 @@ passport.deserializeUser(User.deserializeUser());
 // allows for ejs use as main compiler
 app.set('view engine', 'ejs');
 
-app.use('/', indexRoutes)
-app.use('/:user_id/collections', collectionRoutes)
-app.use('/:user_id/collections/:col_id/items', itemRoutes)
+app.use('/', indexRoutes);
+app.use('/:user_id/collections', collectionRoutes);
+app.use('/:user_id/collections/:col_id/items', itemRoutes);
 
 app.listen(3000, function(){
     console.log("Own this, Onus")

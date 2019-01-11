@@ -90,12 +90,11 @@ router.put('/:itemID', isLoggedIn, function(req, res){
 
 // delete item
 router.delete('/:itemID/', isLoggedIn, function(req, res){
-    Item.findByIdAndDelete(req.params.itemID, function(err, data){
+    Item.findByIdAndDelete(req.params.itemID, function(err){
         if(err){
             console.log(err);
             res.redirect('back');
         } else {
-            console.log(data);
             res.redirect('/' + req.params.user_id);
         }
     })

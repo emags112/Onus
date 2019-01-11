@@ -1,6 +1,5 @@
 *** To Do ***
  - edit/update/destroy for user
- - destroy for collections
- - change the location of an item (from one collection to another)
+ - change the location of an item (from one collection to another), currently duplicates.
  - filestorage for photos
  - ???

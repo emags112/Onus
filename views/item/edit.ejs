@@ -3,7 +3,7 @@
 <div class="ui container">
     <h1>this is the item/edit route</h1>
     <div class="ui segment">
-        <form class="ui form" action="/<%= user._id %>/collections/<%= collection._id %>/items/<%= item._id %>?_method=PUT" method="POST">
+        <form id="itemForm" class="ui form" action="/<%= user._id %>/collections/<%= collection._id %>/items/<%= item._id %>?_method=PUT" method="POST">
             <div class="field">
                 <label for="item[name]">Name:</label>
                 <input type="text" name="item[name]" value="<%= item.name %>">
@@ -21,7 +21,7 @@
         <div class="fields">  
             <div class="ten wide field">
                 <label for="selectiedCol">Which collection does it belong to?</label>
-                <select name="selectiedCol" class="ui dropdown">
+                <select id="selectiedCol" name="selectiedCol" class="ui dropdown">
                     <option value="<%= collection._id %>"><%= collection.name %></option>
                     <div class="divider"></div>
                     <optgroup>
@@ -73,5 +73,19 @@
         </form>
     </div>
 </div>
+
+<script>
+    const form = document.querySelector('#itemForm');
+    const selectedCol = document.querySelector('#selectiedCol');
+
+    function setAction(){
+        collectionID = selectedCol.value;
+        form.setAttribute('action', `/<%= user._id %>/collections/${collectionID}/items`);
+    }
+
+    window.onload = setAction;
+    document.querySelector('#selectiedCol').addEventListener('change', setAction)
+
+</script>
 
 <% include ../partials/footer %>

@@ -40,8 +40,11 @@
                 </div>
                 <div class="content">
                     <div class="buttons">
-                        <a class="ui mini teal basic button inlineButton" href="/<%= user._id %>/collections/<%= collection._id %>/items/new"><i class="plus icon"></i>Add Item</a>
-                        <a class="ui mini blue basic button inlineButton" href="/<%= user._id %>/collections/<%= collection._id %>/edit"><i class="edit outline icon"></i>Edit Collection</a>
+                        <a href="/<%= user._id %>/collections/<%= collection._id %>/items/new"><button class="ui mini teal basic button inlineButton"><i class="plus icon"></i>Add Item</button></a>
+                        <a href="/<%= user._id %>/collections/<%= collection._id %>/edit"><button class="ui mini blue basic button inlineButton"><i class="edit outline icon"></i>Edit</button></a>
+                        <form class="inlineForm" action="/<%= user._id %>/collections/<%= collection._id %>/?_method=DELETE" method="POST">
+                            <button class="ui mini orange basic button inlineButton"><i class="trash alternate outline icon"></i>Delete</button>
+                        </form>
                     </div>
                     <% if(collection.contents.length > 0){ %>
                         <div class="cardbox">
@@ -96,7 +99,7 @@
     <div id="createSegment" class="ui bottom attached tab segment">
             <div class="ui placeholder segment">
               <div class="ui header">Create a Collection</div>
-              <form class="ui form" action="/<%= user._id %>/collections" method="POST">
+              <form id="collectionForm" class="ui form" action="/<%= user._id %>/collections" method="POST">
                     <div class="field">
                         <label for="name">Name your collection</label>
                         <input type="text" name="collection[name]" placeholder="Pairs of socks">

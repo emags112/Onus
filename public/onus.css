@@ -230,3 +230,12 @@ form button.ui.left.floated.button{
 .buttons{
   margin: .5em 1em !important;
 }
+
+#deleteColButton{
+  margin: 0;
+}
+
+#collectionForm{
+  margin-top:0;
+  margin-bottom:0;
+}
